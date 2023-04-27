@@ -1,0 +1,62 @@
+main {
+  margin: auto;
+  height: 80vh;
+  position: absolute;
+  bottom: 0;
+}
+
+section {
+  margin: 10vh 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  width: 100vw;
+}
+
+.integrantesRa {
+  display: flex;
+  flex-direction: column;
+  margin: 5vh;
+}
+
+.integrantesRa div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px;
+  width: 40vw;
+  height: 7vh;
+  margin: 2vh;
+  padding: 2vh;
+  background-color: #4e4e4e80;
+  box-shadow: 0 0.125em 0.31em rgba(0, 0, 0, 0.1);
+  transition: height 0.2s ease-in-out;
+}
+
+.integrantesRa div:hover {
+  padding: 2vh;
+  height: 8.8vh;
+}
+
+.integrantesRa div p {
+  font-size: 1.125em;
+  font-weight: bold;
+}
+
+.integrantesRa div p::after {
+  margin-top: 0.3vh;
+  font-size: 0.75em;
+  font-weight: bold;
+  display: none;
+  transition: 1.5s ease-in-out;
+}
+
+.integrantesRa div:hover p::after {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  content: attr(data-ra);
+}

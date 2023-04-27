@@ -1,0 +1,75 @@
+header {
+  display: flex;
+  width: 100vw;
+  height: 18.3vh;
+  justify-content: space-around;
+  top: 0;
+  position: fixed;
+  z-index: 2;
+  background-color: #000;
+  align-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 4.5em;
+  color: #ff0000;
+}
+
+nav {
+  width: 35vw;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+ul>li {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLink:hover {
+  transition: 0.5s color ease;
+  color: red;
+}
+
+.cart {
+  max-width: 3vw;
+  max-height: 3vw;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart::before {
+  content: attr(data-count);
+  background-color: red;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  min-height: 1.5em;
+  max-width: 1.5em;
+  max-height: 1.5em;
+  font-size: 0.8em;
+  position: sticky;
+  border-radius: 50%;
+  top: 100%;
+  left: 100%;
+}
+.cart img{
+  width: 1.5vw;
+}

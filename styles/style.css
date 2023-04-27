@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(circle,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.896796218487395) 50%,
+      rgba(0, 0, 0, 1) 100%);
+  color: #e5e5e5;
+  overflow: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+  font-size: 16px;
+}
+
+/* Ajustar o tamanho da fonte para telas maiores que 1920px (resolução Full HD) */
+@media (min-width: 1920px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Ajustar o tamanho da fonte para telas maiores que 2560px (resolução 2,5k) */
+@media (min-width: 2560px) {
+  body {
+    font-size: 24px;
+  }
+}
+
+/* Ajustar o tamanho da fonte para telas maiores que 3840px (resolução 4k) */
+@media (min-width: 3840px) {
+  body {
+    font-size: 40px;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 0.31em;
+  height: 0.19em;
+  /* A altura só é vista quando a rolagem é horizontal */
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+  padding: 1.125em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+input {
+  font-size: 1em;
+}
