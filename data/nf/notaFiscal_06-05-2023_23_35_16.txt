@@ -1,0 +1,12 @@
+Nome: Kayke Bauer
+Email: bauer.kaykemarins@gmail.com
+Cidade: Louveira
+Data: 06-05-2023 23:35:16
+------------------------------------
+Filmes alugados: 
+	 - A Lista de Schindler
+ID dos filmes alugados: 
+	 - 424
+Valor pago nos filmes: R$22,22
+------------------------------------
+Valor total: R$22,22

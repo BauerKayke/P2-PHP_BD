@@ -27,7 +27,7 @@ ul {
   align-items: center;
 }
 
-ul>li {
+ul > li {
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -70,6 +70,6 @@ ul>li {
   top: 100%;
   left: 100%;
 }
-.cart img{
+.cart img {
   width: 1.5vw;
 }

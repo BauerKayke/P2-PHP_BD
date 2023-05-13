@@ -23,7 +23,7 @@
   <div class='finaly'>
     <label>
       <center>Compra efetuada com sucesso! Baixe a nota fiscal clicando <a
-          href="../components/download.php?file=<?php echo $file ?>">aqui</a></center>
+          href="rent.php?function=download">aqui</a></center>
     </label>
     <br>
     <form action="../">
