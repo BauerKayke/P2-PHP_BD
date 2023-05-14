@@ -19,13 +19,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/detail.css">
+    <link rel="stylesheet" href="../styles/details.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +43,47 @@
     <?php include '../components/header.php' ?>
     <section id="container-detail">
         <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face'.$linha['caminho_img']?>" alt="<?php echo $linhas['nome'] ?>">
+        <div class="infos">
+            <div>
+                <h2><?php echo $linha["nome"]?></h2>
+                <p><?php echo $linha["descricao"]?></p>
+            </div>
+            <div class="button">
+                <a href="#row<?php echo $linha["id"] ?>" style="text-decoration: none">
+                    <button class="add" id="add<?php echo $linha["id"]; echo $type ?>" onclick="addToCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
+                    Adicionar ao Carrinho
+                    </button>
+                </a>
+                <a href="#row<?php echo $linha["id"] ?>" style="text-decoration: none">
+                    <button class="remove" id="remove<?php echo $linha["id"]; echo $type ?>" onclick="removeFromCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
+                        Remover do Carrinho 
+                    </button>
+                </a>
+            </div>
+        </div>
     </section>
 </body>
 </html>
+
+<script>
+    let onCartType
+    
+    <?php if($type == 1): ?>
+      onCartType = "onCartSerie"
+    <?php else: ?>
+      onCartType = "onCartFilm"
+    <?php endif; ?>
+
+    const item = localStorage.getItem(<?php echo $id ?>)
+    
+    const btnAdd = document.querySelector("#add<?php echo $id ?><?php echo $type ?>");
+    const btnRemove = document.querySelector("#remove<?php echo $id ?><?php echo $type ?>");
+
+    if(item == onCartType) {
+        btnAdd.classList.add("hide");
+        btnRemove.classList.remove("hide");
+    } else {
+        btnAdd.classList.remove("hide");
+        btnRemove.classList.add("hide");
+    }
+</script>

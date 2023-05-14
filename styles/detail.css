@@ -1,6 +1,19 @@
 #container-detail {
-  width: 100vw;
-  height: 80vh;
+  width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 45vh;
+  display: flex;
+}
+#container-detail img {
+  height: 330px;
+  width: 220px;
+}
+.infos {
+  display: flex;
+  margin-left: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.infos h2 {
+  margin-bottom: 1rem;
 }

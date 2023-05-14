@@ -32,12 +32,25 @@
     }
   ?>
   <script>
+    let onCartType
+    
+    <?php if($type == 1): ?>
+      onCartType = "onCartSerie"
+    <?php else: ?>
+      onCartType = "onCartFilm"
+    <?php endif; ?>
+        
     for (let i = 0; i < localStorage.length; i++) {
-      const movie = document.getElementById(localStorage.key(i));
-      try {
-        movie.classList.add('oncart');
-      } catch (error) {
-        console.log(error);
+      let movie
+      if(localStorage[localStorage.key(i)] == onCartType) {
+        movie = document.getElementById(localStorage.key(i));
+      }
+      if(movie) {
+        try {
+          movie.classList.add('oncart');
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   </script>

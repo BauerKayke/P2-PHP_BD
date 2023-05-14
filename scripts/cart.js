@@ -1,19 +1,19 @@
-function cartUpdate() {
+function cartUpdate(onCartType) {
   const moviesOnCart = Object.entries(localStorage);
   let i = 0;
+  console.log(moviesOnCart);
   // Itera sobre cada item utilizando forEach
   moviesOnCart.forEach(([key, value]) => {
-    if (value == "onCart") {
+    if (value == onCartType) {
       i++;
     }
   });
   if (i <= 9) {
-    document.querySelector('#cart').dataset.count = i;
+    document.querySelector("#cart").dataset.count = i;
   } else {
-
-    document.querySelector('#cart').dataset.count = "9+";
+    document.querySelector("#cart").dataset.count = "9+";
   }
-  if (document.cookie.length==0 && moviesOnCart.length!=0) {
+  if (document.cookie.length == 0 && moviesOnCart.length != 0) {
     clearCart();
   }
 }
@@ -25,44 +25,45 @@ function clearCart() {
     localStorage.removeItem(key, value);
   });
 }
-function addToCart(detailId) {
-  const id = localStorage.getItem('detailed');
+function addToCart(id, type) {
+  let onCartType;
+  if (type == 0) {
+    onCartType = "onCartFilm";
+  } else {
+    onCartType = "onCartSerie";
+  }
+  console.log(onCartType);
+  localStorage.setItem(id, onCartType);
+  document.cookie = id + `=${onCartType};path=/`;
 
-  localStorage.setItem(id, "onCart");
-  document.cookie = id + "=onCart;path=/";
+  const btnAdd = document.querySelector(`#add${id}${type}`);
+  const btnRemove = document.querySelector(`#remove${id}${type}`);
 
-  const btnAdd = document.querySelector(`#add${detailId}`);
-  const btnRemove = document.querySelector(`#remove${detailId}`);
-  const movie = document.getElementById(id);
+  btnAdd.classList.add("hide");
+  btnRemove.classList.remove("hide");
 
-  movie.classList.add('oncart');
-  btnAdd.classList.add('hide');
-  btnRemove.classList.remove('hide');
-
-  closeMovieDetail(detailId);
-  cartUpdate();
+  cartUpdate(onCartType);
 }
-function removeFromCart(detailId, itemId) {
-  if (itemId == null && detailId != null) {
-    const id = localStorage.getItem('detailed');
+function removeFromCart(id, type) {
+  if (id != undefined) {
+    if (type == 0) {
+      localStorage.removeItem(id, "onCartFilm");
+    } else {
+      localStorage.removeItem(id, "onCartSerie");
+    }
+    document.cookie = id + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";
 
-    localStorage.removeItem(id, "");
-    document.cookie = id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+    const btnAdd = document.querySelector(`#add${id}${type}`);
+    const btnRemove = document.querySelector(`#remove${id}${type}`);
 
-    const btnAdd = document.querySelector(`#add${detailId}`);
-    const btnRemove = document.querySelector(`#remove${detailId}`);
-    const movie = document.getElementById(id);
+    btnAdd.classList.remove("hide");
+    btnRemove.classList.add("hide");
 
-    movie.classList.remove('oncart');
-
-    btnAdd.classList.remove('hide');
-    btnRemove.classList.add('hide');
-
-    closeMovieDetail(detailId);
     cartUpdate();
   } else if (itemId != null && detailId == null) {
     localStorage.removeItem(itemId, "");
-    document.cookie = itemId + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+    document.cookie =
+      itemId + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";
     location.reload();
   }
 }
