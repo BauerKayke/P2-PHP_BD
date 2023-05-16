@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <header>
     <div>
         <h1>PopFlix</h1>
@@ -15,5 +16,9 @@
         <a href="../pages/cart.php">
             <img src="../img/shopping-cart.png">
         </a>
+    </div>
+    <div class="user">
+        <span><?php echo $_SESSION["user"] ?></span>
+        <span><a href="/pages/sair.php">Sair</a></span>
     </div>
 </header>

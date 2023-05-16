@@ -1,3 +1,11 @@
+<?php
+  session_cache_expire(10);
+  session_start();
+
+  if(!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
+    header("Location: /pages/login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -26,42 +34,43 @@
   }
 
   include '../components/header.php';
-  $data = file_get_contents('../data/movies.json');
-  $items = json_decode($data);
-
   ?>
   <section id='container'>
     <section id='items'>
       <?php
+      $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
+
+      $tabela;
       $total = 0;
 
-      foreach ($items as $item) {
-        foreach ($_COOKIE as $key => $ids) {
-          if ($item->id == $key) {
-            $id = $item->id;
-            $poster_path = $item->poster_path;
-            $title = $item->title;
-            $price = "R$" . number_format($item->price, 2, ',', '.');
-            $total += $item->price;
+      foreach ($_COOKIE as $key => $ids) {
+        if($ids == "onCartFilm") {
+          $tabela = mysqli_query($conexao, "SELECT * FROM filmes WHERE id = $key");
+          while($linhas = mysqli_fetch_array($tabela)) {
+            $id = $linhas["id"];
+            $poster_path = $linhas["caminho_img"];
+            $title = $linhas["nome"];
+            $price = "R$".number_format($linhas["valor"], 2, ',', '.');
+            $total += $linhas["valor"];
             include '../components/cartItem.php';
           }
         }
       }
-      $data = "../data/series.xml";
-      $items = simplexml_load_file($data)->series;
-      $items = $items->serie;
-      foreach ($items as $item) {
-        foreach ($_COOKIE as $key => $ids) {
-          if ($item->id == $key) {
-            $id = $item->id;
-            $poster_path = $item->poster_path;
-            $title = $item->name;
-            $price = "R$" . number_format(floatval($item->price), 2, ',', '.');
-            $total += $item->price;
+
+      foreach ($_COOKIE as $key => $ids) {
+        if($ids == "onCartSerie") {
+          $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $key");
+          while($linhas = mysqli_fetch_array($tabela)) {
+            $id = $linhas["id"];
+            $poster_path = $linhas["caminho_img"];
+            $title = $linhas["nome"];
+            $price = "R$".number_format($linhas["valor"], 2, ',', '.');
+            $total += $linhas["valor"];
             include '../components/cartItem.php';
           }
         }
       }
+
       $atribute = null;
       if ($total == 0) {
         echo "<div class='cart-item'>
@@ -77,7 +86,7 @@
           Preço total:
         </label>
         <?php
-        echo "R$" . number_format($total, 2, ',', '.');
+        echo "R$".number_format($total, 2, ',', '.');
         ?>
         <form action="../pages/rentForm.php">
           <input type='submit' value='Alugar' <?php echo $atribute ?>>
@@ -89,3 +98,5 @@
 </body>
 
 </html>
+
+<?php	mysqli_close($conexao);

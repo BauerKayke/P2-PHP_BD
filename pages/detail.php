@@ -1,4 +1,11 @@
 <?php
+    session_cache_expire(10);
+    session_start();
+  
+    if(!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
+      header("Location: http://localhost/pages/login.php");
+    }
+
     if(!isset($_GET["id"]) || !isset($_GET["type"])) {
         return header('Location: http://localhost/');
     }
@@ -87,3 +94,5 @@
         btnRemove.classList.add("hide");
     }
 </script>
+
+<?php mysqli_close($conexao) ?>

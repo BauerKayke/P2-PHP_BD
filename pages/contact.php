@@ -1,3 +1,11 @@
+<?php
+  session_cache_expire(10);
+  session_start();
+
+  if(!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
+    header("Location: http://localhost/pages/login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

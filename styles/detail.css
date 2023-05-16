@@ -1,7 +1,6 @@
 #container-detail {
   width: 100%;
-  position: absolute;
-  bottom: 45vh;
+  margin-top: 20vh;
   display: flex;
 }
 #container-detail img {

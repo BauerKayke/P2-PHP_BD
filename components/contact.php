@@ -8,10 +8,7 @@
         <p data-ra="RA: 123">Kayke Bauer Santana Marins</p>
       </div>
       <div>
-        <p data-ra="RA: 345">Lucas da Silva Oliveira</p>
-      </div>
-      <div>
-        <p data-ra="RA: 4525435234">Marcos Paulo Moraes Frances</p>
+        <p data-ra="RA: 123">Gabriel Freire de Araújo</p>
       </div>
       <div>
         <p data-ra="RA: 4525435234">Paulo Augusto Lima Bernardi</p>
