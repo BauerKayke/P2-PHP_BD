@@ -1,23 +1,24 @@
 <?php
-    if(isset($_POST["user"]) && isset($_POST["password"])) {
-        $user = $_POST["user"];
-        $password = $_POST["password"];
+if (isset($_POST["user"]) && isset($_POST["password"])) {
+    $user = $_POST["user"];
+    $password = $_POST["password"];
 
-        $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
-        
-        $tabela = mysqli_query($conexao, "SELECT * FROM usuarios");
-    
-        while($linhas = mysqli_fetch_array($tabela)) {
-            if($user == $linhas["usuario"] && $password == $linhas["senha"]) {
-                session_cache_expire(1);
-                session_start();
-                $_SESSION["login"] = true;
-                $_SESSION["user"] = $user;
-                mysqli_close($conexao);
-                header('Location: http://localhost/');
-            }
+    $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
+
+    $tabela = mysqli_query($conexao, "SELECT * FROM clientes");
+
+    while ($linhas = mysqli_fetch_array($tabela)) {
+        if ($user == $linhas["usuario"] && $password == $linhas["senha"]) {
+            session_cache_expire(1);
+            session_start();
+            $_SESSION["login"] = true;
+            $_SESSION["user"] = $user;
+            setcookie('user', $linhas["usuario"], time() + 3600, '/');
+            mysqli_close($conexao);
+            header('Location: http://localhost/');
         }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

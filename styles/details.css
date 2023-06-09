@@ -11,10 +11,12 @@
   width: 100vw;
   height: 55vh;
   background: rgb(47, 47, 47);
-  background: linear-gradient(90deg,
-      rgba(47, 47, 47, 1) 0%,
-      rgba(62, 62, 62, 0.8185399159663865) 50%,
-      rgba(47, 47, 47, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(47, 47, 47, 1) 0%,
+    rgba(62, 62, 62, 0.8185399159663865) 50%,
+    rgba(47, 47, 47, 1) 100%
+  );
   display: flex;
   flex-direction: row;
   margin: 3.1vh 0;
@@ -25,7 +27,6 @@
   height: 3vw;
   display: flex;
   align-items: center;
-  margin: 1vw;
   transform: translateY(-30%);
 }
 
@@ -33,21 +34,11 @@
   color: #fff;
   font-size: 2.2em;
   transition: all 0.3s ease;
-  margin: 1vw;
 }
 
 .left-arrow:hover {
   color: red;
   cursor: pointer;
-}
-
-.detail-cover {
-  max-width: 100%;
-  max-height: 100%;
-  border: transparent;
-  border-radius: 4px;
-  position: relative;
-  margin: 1vw;
 }
 
 .info {
@@ -64,42 +55,11 @@
   display: inline-table;
 }
 
-.movie-title::after {
-  content: attr(data-size);
-  color: #fff;
-  font-size: 0.4em;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
 .movie-price {
   height: 5%;
   color: #fff;
   font-size: 2em;
   display: inline-table;
-}
-
-.movie-description {
-  overflow: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: black transparent;
-}
-
-.movie-description::-webkit-scrollbar {
-  width: 0.2em;
-  height: 0.2em;
-  /* A altura só é vista quando a rolagem é horizontal */
-}
-
-.movie-description::-webkit-scrollbar-track {
-  background: transparent;
-  padding: 0.125em;
-}
-
-.movie-description::-webkit-scrollbar-thumb {
-  background-color: #000;
 }
 
 #button {

@@ -1,7 +1,9 @@
 #container-detail {
-  width: 100%;
-  margin-top: 20vh;
+  width: 96vw;
+  margin: 20vh 0vw 0vh 2vw;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #container-detail img {
   height: 330px;

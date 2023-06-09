@@ -31,6 +31,12 @@
       </div>
       <br />
       <div class="div-input">
+        <label for="nome">Nome </label>
+        <br />
+        <input type="text" name="nome" placeholder="Digite seu nome completo" required />
+      </div>
+      <br />
+      <div class="div-input">
         <label for="email">E-mail </label>
         <br />
         <input type="email" name="email" placeholder="Digite seu email" required />

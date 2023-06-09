@@ -28,6 +28,7 @@
   $type = 1;
   include '../components/dataLoad.php';
   ?>
+
 </body>
 
 </html>

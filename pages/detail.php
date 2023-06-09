@@ -1,27 +1,27 @@
 <?php
-    session_cache_expire(10);
-    session_start();
-  
-    if(!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
-      header("Location: http://localhost/pages/login.php");
-    }
+session_cache_expire(10);
+session_start();
 
-    if(!isset($_GET["id"]) || !isset($_GET["type"])) {
-        return header('Location: http://localhost/');
-    }
-    $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
-    $id = $_GET["id"];
-    $type = $_GET["type"];
+if (!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
+    header("Location: http://localhost/pages/login.php");
+}
 
-    $tabela;
+if (!isset($_GET["id"]) || !isset($_GET["type"])) {
+    return header('Location: http://localhost/');
+}
+$conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
+$id = $_GET["id"];
+$type = $_GET["type"];
 
-    if($type == 1) {
-        $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $id");
-    } else if($type == 0){
-        $tabela = mysqli_query($conexao, "SELECT * FROM filmes  WHERE id = $id");
-    }
+$tabela;
 
-    $linha = mysqli_fetch_array($tabela);
+if ($type == 1) {
+    $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $id");
+} else if ($type == 0) {
+    $tabela = mysqli_query($conexao, "SELECT * FROM filmes  WHERE id = $id");
+}
+
+$linha = mysqli_fetch_array($tabela);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -44,25 +44,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <script src="../scripts/cart.js"></script>
-    <title><?php echo $linha["nome"]?></title> 
+    <title><?php echo $linha["nome"] ?></title> 
 </head>
 <body onload="cartUpdate()">
     <?php include '../components/header.php' ?>
+    
     <section id="container-detail">
-        <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face'.$linha['caminho_img']?>" alt="<?php echo $linhas['nome'] ?>">
+        <div class="arrow-box">
+            <a href="#row" style="text-decoration: none">
+                <label for="left-arrow" class="left-arrow" onclick="">&#8617;</label>
+            </a>
+        </div>
+        <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face' . $linha['caminho_img'] ?>" alt="<?php echo $linhas['nome'] ?>">
         <div class="infos">
             <div>
-                <h2><?php echo $linha["nome"]?></h2>
-                <p><?php echo $linha["descricao"]?></p>
+                <h2><?php echo $linha["nome"] ?></h2>
+                <p><?php echo $linha["descricao"] ?></p>
             </div>
             <div class="button">
                 <a href="#row<?php echo $linha["id"] ?>" style="text-decoration: none">
-                    <button class="add" id="add<?php echo $linha["id"]; echo $type ?>" onclick="addToCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
+                    <button class="add" id="add<?php echo $linha["id"];
+                    echo $type ?>" onclick="addToCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
                     Adicionar ao Carrinho
                     </button>
                 </a>
                 <a href="#row<?php echo $linha["id"] ?>" style="text-decoration: none">
-                    <button class="remove" id="remove<?php echo $linha["id"]; echo $type ?>" onclick="removeFromCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
+                    <button class="remove" id="remove<?php echo $linha["id"];
+                    echo $type ?>" onclick="removeFromCart(<?php echo $linha['id'] ?>, <?php echo $type ?>)">
                         Remover do Carrinho 
                     </button>
                 </a>
@@ -75,11 +83,11 @@
 <script>
     let onCartType
     
-    <?php if($type == 1): ?>
-      onCartType = "onCartSerie"
-    <?php else: ?>
-      onCartType = "onCartFilm"
-    <?php endif; ?>
+    <?php if ($type == 1) { ?>
+                                                  onCartType = "onCartSerie"
+    <?php } else { ?>
+                                                  onCartType = "onCartFilm"
+    <?php } ?>
 
     const item = localStorage.getItem(<?php echo $id ?>)
     

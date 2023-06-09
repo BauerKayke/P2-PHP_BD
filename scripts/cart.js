@@ -1,13 +1,12 @@
-function cartUpdate(onCartType) {
+function cartUpdate() {
   const moviesOnCart = Object.entries(localStorage);
   let i = 0;
-  console.log(moviesOnCart);
-  // Itera sobre cada item utilizando forEach
   moviesOnCart.forEach(([key, value]) => {
-    if (value == onCartType) {
+    if (value.includes('onCartFilm') || value.includes('onCartSerie')) {
       i++;
     }
   });
+
   if (i <= 9) {
     document.querySelector("#cart").dataset.count = i;
   } else {
@@ -32,7 +31,6 @@ function addToCart(id, type) {
   } else {
     onCartType = "onCartSerie";
   }
-  console.log(onCartType);
   localStorage.setItem(id, onCartType);
   document.cookie = id + `=${onCartType};path=/`;
 
@@ -42,7 +40,7 @@ function addToCart(id, type) {
   btnAdd.classList.add("hide");
   btnRemove.classList.remove("hide");
 
-  cartUpdate(onCartType);
+  cartUpdate();
 }
 function removeFromCart(id, type) {
   if (id != undefined) {

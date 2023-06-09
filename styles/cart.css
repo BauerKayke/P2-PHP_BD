@@ -45,7 +45,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .item-cover {
-  max-height: 18vh;
+  max-height: 25vh;
 }
 
 .title {
@@ -62,11 +62,14 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
 }
 
-.total-price label{
+.total-price label {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#remove {
+  margin: 15vh;
 }
 
 #remove:hover {
@@ -74,12 +77,21 @@ body::-webkit-scrollbar-thumb {
   color: #ff0000;
 }
 
-.price {
+.price data {
   width: 20vw;
   display: flex;
   justify-content: center;
 }
-
+.dataSelection > #date {
+  width: 13vw;
+  height: 7vh;
+}
+.dataSelection > #date:hover {
+  cursor: pointer;
+  transition: none;
+  background-color: #59595976;
+  color: #ffff;
+}
 #price {
   width: 20vw;
   height: 80vh;
@@ -120,4 +132,12 @@ body::-webkit-scrollbar-thumb {
 #price input:disabled:hover {
   background-color: rgba(239, 239, 239, 0.3);
   cursor: not-allowed;
+}
+
+.dataSelection {
+  padding: 0.625em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

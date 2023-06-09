@@ -21,35 +21,53 @@ foreach ($_COOKIE as $key) {
 if ($i != 0) {
   date_default_timezone_set('America/Sao_Paulo');
 
-  $dataFilmes = file_get_contents('../data/movies.json');
-  $itemsFilmes = json_decode($dataFilmes);
 
-  $dataSeries = simplexml_load_file('../data/series.xml')->series;
 
-  if (isset($_POST['firstname'], $_POST['email'])) {
-    $email = $_POST['email'];
-    $personName = $_POST['firstname'];
-  }
+  $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
 
-  foreach ($itemsFilmes as $item) {
-    foreach ($_COOKIE as $key => $n) {
-      if ($item->id == $key) {
-        $id = $id . "\n\t - " . $item->id;
-        $titles = $titles . "\n\t - " . $item->title;
-        $totalF += $item->price;
+
+
+  $tabela;
+  $total = 0;
+
+
+
+
+  foreach ($_COOKIE as $key => $ids) {
+    $tabela = mysqli_query($conexao, "SELECT * FROM clientes");
+    while ($linhas = mysqli_fetch_array($tabela)) {
+      if ($ids == $linhas["usuario"]) {
+        $email = $linhas['email'];
+        $personName = $linhas['nome'];
       }
     }
   }
 
-  foreach ($dataSeries->children() as $data) {
-    foreach ($_COOKIE as $key => $ids) {
-      if ($data->id == $key) {
-        $idsSeries = $idsSeries . "\n\t - " . $data->id;
-        $titlesSeries = $titlesSeries . "\n\t - " . $data->name;
-        $totalS += $data->price;
+
+  foreach ($_COOKIE as $key => $ids) {
+    if ($ids == "onCartFilm") {
+      $tabela = mysqli_query($conexao, "SELECT * FROM filmes WHERE id = $key");
+      while ($linhas = mysqli_fetch_array($tabela)) {
+        $id = $id . "\n\t - " . $linhas["id"];
+        $titles = $titles . "\n\t - " . $linhas["nome"];
+        $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
+        $totalF += $linhas["valor"];
       }
     }
   }
+
+  foreach ($_COOKIE as $key => $ids) {
+    if ($ids == "onCartSerie") {
+      $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $key");
+      while ($linhas = mysqli_fetch_array($tabela)) {
+        $idsSeries = $idsSeries . "\n\t - " . $linhas["id"];
+        $titlesSeries = $titlesSeries . "\n\t - " . $linhas["nome"];
+        $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
+        $totalS += $linhas["valor"];
+      }
+    }
+  }
+
   $totalT = $totalF + $totalS;
 
   //api para pegar localizacao
@@ -124,7 +142,7 @@ if ($totalF != 0) {
   $pdf->Ln(5);
   $pdf->Line(10, $pdf->GetY(), 200, $pdf->GetY(), array('width' => 0.2, 'color' => array(0, 0, 0)));
   $pdf->Ln(5);
-  
+
 }
 if ($totalS != 0) {
   $totalS = "R$" . number_format($totalS, 2, ',', '.');

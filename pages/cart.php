@@ -1,10 +1,10 @@
 <?php
-  session_cache_expire(10);
-  session_start();
+session_cache_expire(10);
+session_start();
 
-  if(!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
-    header("Location: /pages/login.php");
-  }
+if (!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
+  header("Location: /pages/login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,13 +44,13 @@
       $total = 0;
 
       foreach ($_COOKIE as $key => $ids) {
-        if($ids == "onCartFilm") {
+        if ($ids == "onCartFilm") {
           $tabela = mysqli_query($conexao, "SELECT * FROM filmes WHERE id = $key");
-          while($linhas = mysqli_fetch_array($tabela)) {
+          while ($linhas = mysqli_fetch_array($tabela)) {
             $id = $linhas["id"];
             $poster_path = $linhas["caminho_img"];
             $title = $linhas["nome"];
-            $price = "R$".number_format($linhas["valor"], 2, ',', '.');
+            $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
             $total += $linhas["valor"];
             include '../components/cartItem.php';
           }
@@ -58,13 +58,13 @@
       }
 
       foreach ($_COOKIE as $key => $ids) {
-        if($ids == "onCartSerie") {
+        if ($ids == "onCartSerie") {
           $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $key");
-          while($linhas = mysqli_fetch_array($tabela)) {
+          while ($linhas = mysqli_fetch_array($tabela)) {
             $id = $linhas["id"];
             $poster_path = $linhas["caminho_img"];
             $title = $linhas["nome"];
-            $price = "R$".number_format($linhas["valor"], 2, ',', '.');
+            $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
             $total += $linhas["valor"];
             include '../components/cartItem.php';
           }
@@ -81,15 +81,19 @@
       ?>
     </section>
     <section id='price'>
+      <div class="dataSelection">
+        <label for="date">Selecione uma data:</label>
+        <input type="date" id="date" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d', strtotime('+1 month')); ?>">
+      </div>
       <div class="total-price">
         <label for="price">
           Preço total:
         </label>
         <?php
-        echo "R$".number_format($total, 2, ',', '.');
+        echo "R$" . number_format($total, 2, ',', '.');
         ?>
-        <form action="../pages/rentForm.php">
-          <input type='submit' value='Alugar' <?php echo $atribute ?>>
+        <form action="../server/rent.php">
+          <input type='submit' id="alugar" value='Alugar' <?php echo $atribute ?>>
           </input>
         </form>
       </div>
@@ -99,4 +103,4 @@
 
 </html>
 
-<?php	mysqli_close($conexao);
+<?php mysqli_close($conexao);
