@@ -52,6 +52,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
             $title = $linhas["nome"];
             $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
             $total += $linhas["valor"];
+            $type = 0;
             include '../components/cartItem.php';
           }
         }
@@ -66,6 +67,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] != true) {
             $title = $linhas["nome"];
             $price = "R$" . number_format($linhas["valor"], 2, ',', '.');
             $total += $linhas["valor"];
+            $type = 1;
             include '../components/cartItem.php';
           }
         }

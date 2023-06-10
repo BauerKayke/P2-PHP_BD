@@ -9,7 +9,7 @@
         <?php echo $price ?>
     </div>
     <!-- Adicionar Funçao de remover do carrinho -->
-    <div id='remove' onclick="removeFromCart(null, <?php echo $id ?>)">
+    <div id='remove' onclick="removeFromCart(<?php echo $id ?>, <?php echo $type ?>, true)">
         X
     </div>
 </div>

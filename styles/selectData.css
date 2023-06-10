@@ -1,0 +1,22 @@
+section {
+  max-width: 60vw;
+  margin: auto;
+  margin-top: 18.3vh;
+}
+
+table {
+  width: 100%;
+}
+
+table tbody td {
+  text-align: center;
+}
+
+table img {
+  cursor: pointer;
+  height: 20px;
+}
+table img.img {
+  cursor: default;
+  height: 120px;
+}

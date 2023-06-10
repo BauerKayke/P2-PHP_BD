@@ -2,7 +2,7 @@ function cartUpdate() {
   const moviesOnCart = Object.entries(localStorage);
   let i = 0;
   moviesOnCart.forEach(([key, value]) => {
-    if (value.includes('onCartFilm') || value.includes('onCartSerie')) {
+    if (value.includes("onCartFilm") || value.includes("onCartSerie")) {
       i++;
     }
   });
@@ -42,7 +42,7 @@ function addToCart(id, type) {
 
   cartUpdate();
 }
-function removeFromCart(id, type) {
+function removeFromCart(id, type, isReload) {
   if (id != undefined) {
     if (type == 0) {
       localStorage.removeItem(id, "onCartFilm");
@@ -54,9 +54,13 @@ function removeFromCart(id, type) {
     const btnAdd = document.querySelector(`#add${id}${type}`);
     const btnRemove = document.querySelector(`#remove${id}${type}`);
 
-    btnAdd.classList.remove("hide");
-    btnRemove.classList.add("hide");
-
+    if (btnAdd && btnRemove) {
+      btnAdd.classList.remove("hide");
+      btnRemove.classList.add("hide");
+    }
+    if (isReload) {
+      location.reload();
+    }
     cartUpdate();
   } else if (itemId != null && detailId == null) {
     localStorage.removeItem(itemId, "");
@@ -64,4 +68,8 @@ function removeFromCart(id, type) {
       itemId + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";
     location.reload();
   }
+}
+
+function returnPage() {
+  window.history.go(-1);
 }

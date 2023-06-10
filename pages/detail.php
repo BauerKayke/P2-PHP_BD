@@ -14,11 +14,14 @@ $id = $_GET["id"];
 $type = $_GET["type"];
 
 $tabela;
+$text;
 
 if ($type == 1) {
     $tabela = mysqli_query($conexao, "SELECT * FROM series WHERE id = $id");
+    $text = "temporadas";
 } else if ($type == 0) {
     $tabela = mysqli_query($conexao, "SELECT * FROM filmes  WHERE id = $id");
+    $text = "minutos";
 }
 
 $linha = mysqli_fetch_array($tabela);
@@ -52,14 +55,16 @@ $linha = mysqli_fetch_array($tabela);
     <section id="container-detail">
         <div class="arrow-box">
             <a href="#row" style="text-decoration: none">
-                <label for="left-arrow" class="left-arrow" onclick="">&#8617;</label>
+                <label for="left-arrow" class="left-arrow" onclick="returnPage()">&#8617;</label>
             </a>
         </div>
-        <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face' . $linha['caminho_img'] ?>" alt="<?php echo $linhas['nome'] ?>">
+        <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face'.$linha['caminho_img'] ?>" alt="<?php echo $linhas['nome'] ?>">
         <div class="infos">
             <div>
                 <h2><?php echo $linha["nome"] ?></h2>
                 <p><?php echo $linha["descricao"] ?></p>
+                <h3 style="margin-top: 1rem">R$<?php echo str_replace(".", ",", $linha["valor"]) ?></h3>
+                <h3 style="margin-top: 1rem"><?php echo $linha["tamanho"]; echo " ".$text; ?></h3>
             </div>
             <div class="button">
                 <a href="#row<?php echo $linha["id"] ?>" style="text-decoration: none">

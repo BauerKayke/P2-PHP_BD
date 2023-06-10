@@ -1,8 +1,9 @@
 <?php
-if (isset($_POST["user"]) && isset($_POST["password"]) && isset($_POST["email"])) {
+if (isset($_POST["user"]) && isset($_POST["password"]) && isset($_POST["email"]) && isset($_POST["nome"])) {
     $user = $_POST["user"];
     $password = $_POST["password"];
     $email = $_POST["email"];
+    $nome = $_POST["nome"];
 
     $conexao = mysqli_connect("localhost", "root", "", "popflix") or die("Falha de conexão");
     $tabela = mysqli_query($conexao, "SELECT * FROM clientes WHERE (usuario = '$user')");

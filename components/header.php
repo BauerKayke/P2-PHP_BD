@@ -18,7 +18,11 @@
         </a>
     </div>
     <div class="user">
-        <span><?php echo $_SESSION["user"] ?></span>
+        <?php if($_SESSION["user"] == "admin"): ?>
+            <a href="/pages/admin"><?php echo $_SESSION["user"] ?></a>
+        <?php else: ?>
+            <span><?php echo $_SESSION["user"] ?></span>
+        <?php endif; ?>
         <span><a href="/pages/sair.php">Sair</a></span>
     </div>
 </header>
