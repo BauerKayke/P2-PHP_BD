@@ -58,7 +58,7 @@ $linha = mysqli_fetch_array($tabela);
                 <label for="left-arrow" class="left-arrow" onclick="returnPage()">&#8617;</label>
             </a>
         </div>
-        <img src="<?php echo 'https://image.tmdb.org/t/p/w220_and_h330_face'.$linha['caminho_img'] ?>" alt="<?php echo $linhas['nome'] ?>">
+        <img src="<?php echo $linha['caminho_img'] ?>" alt="<?php echo $linhas['nome'] ?>">
         <div class="infos">
             <div>
                 <h2><?php echo $linha["nome"] ?></h2>

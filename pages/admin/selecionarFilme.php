@@ -43,7 +43,7 @@
             echo "<tr>";
             echo "<td>".$linhas["id"]."</td>";
             echo "<td>".$linhas["nome"]."</td>";
-            echo "<td><img class='img' src='https://image.tmdb.org/t/p/w220_and_h330_face/".$linhas["caminho_img"]."'</td>";
+            echo "<td><img class='img' src='".$linhas["caminho_img"]."' /></td>";
             echo "<td>".$linhas["valor"]."</td>";
             echo "<td>".$linhas["tamanho"]."</td>";
             echo "<td><a href='./edit.php?id=".$linhas["id"]."&type=0'><img src='/img/edit.png'/></a></td>";
